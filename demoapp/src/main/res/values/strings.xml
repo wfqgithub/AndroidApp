@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name" translatable="false">DemoApp</string>
+
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="hello" translatable="false">hello</string>
+    <string name="action_home" translatable="false">home</string>
+    <string name="action_msg" translatable="false">message</string>
+    <string name="action_friends" translatable="false">friends</string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>

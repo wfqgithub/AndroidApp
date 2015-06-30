@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE android.support.percent.PercentRelativeLayout [<!ELEMENT android.support.percent.PercentRelativeLayout (Button|android.widget.RelativeLayout)*><!ATTLIST android.support.percent.PercentRelativeLayoutxmlns:android CDATA #REQUIREDxmlns:app CDATA #REQUIREDandroid:layout_width CDATA #REQUIREDandroid:layout_height CDATA #REQUIRED><!ELEMENT Button (#PCDATA)><!ATTLIST Buttonandroid:id CDATA #REQUIREDapp:layout_widthPercent CDATA #REQUIREDapp:layout_heightPercent CDATA #REQUIREDapp:layout_marginPercent CDATA #REQUIREDandroid:text CDATA #REQUIRED><!ELEMENT android.widget.RelativeLayout (ImageView)*><!ATTLIST android.widget.RelativeLayoutandroid:layout_below CDATA #REQUIREDapp:layout_widthPercent CDATA #REQUIREDapp:layout_heightPercent CDATA #REQUIRED><!ELEMENT ImageView (#PCDATA)><!ATTLIST ImageViewandroid:layout_width CDATA #REQUIREDandroid:layout_height CDATA #REQUIREDandroid:layout_centerInParent CDATA #REQUIREDandroid:background CDATA #REQUIRED>]>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <Button
+        android:id="@+id/btn_hello"
+        app:layout_widthPercent = "100%"
+        app:layout_heightPercent = "20%"
+        android:text="button"/>
+
+    <android.widget.RelativeLayout
+        android:layout_below="@id/btn_hello"
+        app:layout_widthPercent = "80%"
+        app:layout_heightPercent = "40%"
+        android:layout_centerHorizontal="true"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/beauty_girl"/>
+    </android.widget.RelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>
