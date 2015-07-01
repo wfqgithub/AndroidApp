@@ -1,10 +1,8 @@
-package com.example.demoapp;
+package com.example.demoapp.activity;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,22 +12,40 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.demoapp.R;
+import com.example.demoapp.Utils.JumpUtils;
+import com.example.demoapp.activity.PercentActivity;
+import com.example.demoapp.customView.CircleImageView;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mTb;
 
+    private CircleImageView mCivIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+        addListener();
+    }
+
+
+    private void initView(){
         mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
         mNavigationView = (NavigationView)findViewById(R.id.id_nv_menu);
         mTb = (Toolbar)findViewById(R.id.toolbar);
+        mCivIcon = (CircleImageView) findViewById(R.id.header_userIcon_civ);
         setSupportActionBar(mTb);
         setupDrawerContent(mNavigationView);
+    }
 
+
+    private void addListener(){
+        mCivIcon.setOnClickListener(this);
     }
 
 
@@ -107,4 +123,15 @@ public class MainActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.header_userIcon_civ:
+                JumpUtils.getInstance().jumpToLoginAct(this);
+            break;
+
+        }
+    }
+
 }

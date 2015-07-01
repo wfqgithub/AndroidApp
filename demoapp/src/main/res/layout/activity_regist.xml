@@ -1,0 +1,70 @@
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.demoapp.activity.RegistActivity">
+
+    <LinearLayout
+        android:id="@+id/username_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_marginTopPercent="5%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username" />
+
+        <EditText
+            android:id="@+id/regist_username_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pwd_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username_layout"
+        app:layout_marginTopPercent="5%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pwd" />
+
+        <EditText
+            android:id="@+id/regist_pwd_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/repwd_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pwd_layout"
+        app:layout_marginTopPercent="5%">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/re_pwd" />
+
+        <EditText
+            android:id="@+id/regist_repwd_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/regist_btn"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/repwd_layout"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_regist"
+        app:layout_marginTopPercent="20%"
+        app:layout_widthPercent="60%" />
+
+</android.support.percent.PercentRelativeLayout>

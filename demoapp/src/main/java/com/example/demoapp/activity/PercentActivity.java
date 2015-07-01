@@ -1,9 +1,11 @@
-package com.example.demoapp;
+package com.example.demoapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.demoapp.R;
 
 public class PercentActivity extends AppCompatActivity {
 

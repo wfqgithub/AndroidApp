@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:background="@drawable/beauty_girl"/>
+            android:background="@mipmap/beauty_girl"/>
     </android.widget.RelativeLayout>
 
 </android.support.percent.PercentRelativeLayout>
