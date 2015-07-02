@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 import com.example.demoapp.R;
 
-public class PercentActivity extends AppCompatActivity {
+public class PercentActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

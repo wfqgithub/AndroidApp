@@ -10,4 +10,6 @@ import cn.bmob.v3.update.BmobUpdateAgent;
 public class User extends BmobUser {
 
 
+
+
 }

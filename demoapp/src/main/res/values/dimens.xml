@@ -2,4 +2,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="one_level_textsize">30sp</dimen>
+    <dimen name="two_level_textsize">26sp</dimen>
+    <dimen name="third_level_textsize">24sp</dimen>
 </resources>

@@ -3,6 +3,7 @@ package com.example.demoapp.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,9 +11,10 @@ import android.widget.TextView;
 
 import com.example.demoapp.R;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     private TextView tvRegist;
+    private Toolbar mTb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void initView(){
         tvRegist = (TextView) findViewById(R.id.tv_regist);
         tvRegist.setOnClickListener(this);
+        mTb  = (Toolbar) findViewById(R.id.toolbar);
+        mTb.setTitle("fuck");
+        mTb.setNavigationIcon(R.mipmap.ic_launcher);
+        mTb.setNavigationOnClickListener(this);
     }
 
 
@@ -51,7 +57,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        jumpToRegAct();
+        switch (view.getId()){
+            case R.id.tv_regist:
+                jumpToRegAct();
+                break;
+        }
     }
 
     private void jumpToRegAct(){

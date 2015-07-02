@@ -2,22 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#F01EF0">
+    android:background="@color/mainColor">
 
     <com.example.demoapp.customView.CircleImageView
         android:id="@+id/header_userIcon_civ"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerVertical="true"
-        android:background="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerInParent="true"/>
 
     <TextView
         android:id="@+id/header_username_tv"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/header_userIcon_civ"
-
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/header_userIcon_civ"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/two_level_textsize"
         android:text="用户名" />
 
 </RelativeLayout>

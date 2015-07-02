@@ -14,7 +14,7 @@ import com.example.demoapp.model.User;
 
 import cn.bmob.v3.listener.SaveListener;
 
-public class RegistActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegistActivity extends BaseActivity implements View.OnClickListener{
 
     private EditText etUserName,etPwd,etRePwd;
     private Button btnRegist;

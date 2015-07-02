@@ -1,29 +1,48 @@
 package com.example.demoapp.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.demoapp.R;
 import com.example.demoapp.Utils.JumpUtils;
 import com.example.demoapp.activity.PercentActivity;
+import com.example.demoapp.adapter.FragmentAdapter;
 import com.example.demoapp.customView.CircleImageView;
+import com.example.demoapp.fragment.FirstFragment;
+import com.example.demoapp.fragment.SecFragment;
+import com.example.demoapp.fragment.ThirdFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.ArrayList;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener,FirstFragment.OnFragmentInteractionListener{
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mTb;
+    private ActionBarDrawerToggle mAbToggle;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     private CircleImageView mCivIcon;
+    private String[] tabs ;
+    private FragmentAdapter fragmentAdapter;
+    private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +58,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNavigationView = (NavigationView)findViewById(R.id.id_nv_menu);
         mTb = (Toolbar)findViewById(R.id.toolbar);
         mCivIcon = (CircleImageView) findViewById(R.id.header_userIcon_civ);
+        mTb.setTitle("FUCK");
         setSupportActionBar(mTb);
         setupDrawerContent(mNavigationView);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mAbToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.drawer_open,R.string.drawer_close);
+        mAbToggle.syncState();
+        mDrawerLayout.setDrawerListener(mAbToggle);
+
+        mTabLayout = (TabLayout) findViewById(R.id.tablayout);
+        mViewPager = (ViewPager) findViewById(R.id.vp);
+
+        initTabs();
+        initViewPager();
+
+    }
+
+    private void initTabs(){
+        tabs = getResources().getStringArray(R.array.tabName);
+    }
+
+    private void initViewPager(){
+        fragments.add(FirstFragment.newInstance("1","2"));
+        fragments.add(SecFragment.newInstance("2","3"));
+        fragments.add(ThirdFragment.newInstance("3","4"));
+        fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
+        fragmentAdapter.setData(fragments);
+        fragmentAdapter.setTabs(tabs);
+        mViewPager.setAdapter(fragmentAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabsFromPagerAdapter(fragmentAdapter);
     }
 
 
@@ -99,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -107,20 +155,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mDrawerLayout.openDrawer(Gravity.LEFT);
         }
 
+
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if(hasFocus){
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+//            getWindow().getDecorView().setSystemUiVisibility(
+//                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+//                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
 
@@ -134,4 +184,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mAbToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+        mAbToggle.syncState();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+    }
 }
