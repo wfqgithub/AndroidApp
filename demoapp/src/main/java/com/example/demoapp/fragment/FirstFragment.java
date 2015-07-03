@@ -1,14 +1,32 @@
 package com.example.demoapp.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.demoapp.R;
+import com.example.demoapp.Utils.ImageLoaderUtils;
+import com.example.demoapp.Utils.L;
+import com.example.demoapp.Utils.ToastUtil;
+import com.example.demoapp.adapter.AdVpAdapter;
+import com.example.demoapp.customView.AutoScrollViewPager;
+import com.example.demoapp.model.AdInfo;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,10 +41,18 @@ public class FirstFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "FirstFragment";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ViewPager mViewpager;
+    private Context mContext;
+    private View rootView;
+    private List<ImageView> mLists = new ArrayList<ImageView>();
+    private List<AdInfo> mAdInfo;
+    private AdVpAdapter mAdVpAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +91,8 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        rootView = inflater.inflate(R.layout.fragment_first, container, false);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -84,6 +111,7 @@ public class FirstFragment extends Fragment {
 //            throw new ClassCastException(activity.toString()
 //                    + " must implement OnFragmentInteractionListener");
 //        }
+
     }
 
     @Override
@@ -105,6 +133,95 @@ public class FirstFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        L.d(TAG, "onResume");
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        L.d(TAG, "onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        L.d(TAG, "onStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mLists=null;
+        mAdInfo=null;
+//        mViewpager.stopAutoScroll();
+        mContext = null;
+        L.d(TAG, "onDestroy");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        L.d(TAG, "onDestroyView");
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initView();
+        getData();
+    }
+
+    private void initView() {
+        mContext = getActivity();
+        mViewpager = (ViewPager) rootView.findViewById(R.id.ad_vp);
+    }
+
+
+    private void getData() {
+        BmobQuery<AdInfo> query = new BmobQuery<AdInfo>();
+        //返回50条数据，如果不加上这条语句，默认返回10条数据
+        query.setLimit(50);
+        //执行查询方法
+        query.findObjects(mContext, new FindListener<AdInfo>() {
+            @Override
+            public void onSuccess(List<AdInfo> object) {
+                // TODO Auto-generated method stub
+                ToastUtil.showShort(mContext, "查询成功：共" + object.size() + "条数据。");
+                for (AdInfo adInfo : object) {
+                    L.d(TAG, adInfo.getPicUrl());
+                    mAdInfo = object;
+                }
+                initViewpager();
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                // TODO Auto-generated method stub
+                ToastUtil.showShort(mContext, "查询失败：" + msg);
+            }
+
+        });
+    }
+
+    private void initViewpager(){
+        for(int i = 0 ;i< mAdInfo.size();i++){
+            ImageView mImageView = new ImageView(mContext);
+//            ImageLoaderUtils.loadImage(mImageView,mAdInfo.get(i).getPicUrl());
+//            ImageLoader.getInstance().displayImage(mAdInfo.get(i).getPicUrl(),mImageView);
+            Picasso.with(mContext).load(mAdInfo.get(i).getPicUrl()).into(mImageView);
+            mLists.add(mImageView);
+        }
+//        mViewpager.setCycle(true);
+        mAdVpAdapter = new AdVpAdapter();
+        mAdVpAdapter.setData(mLists);
+        mViewpager.setAdapter(mAdVpAdapter);
+//        mViewpager.startAutoScroll();
     }
 
 }

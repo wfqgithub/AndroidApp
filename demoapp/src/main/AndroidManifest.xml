@@ -36,6 +36,16 @@
             android:name=".activity.RegistActivity"
             android:label="@string/title_activity_regist" >
         </activity>
+        <!-- This service is only used on devices with API v17+ -->
+        <service
+            android:name=".dream.MyDaydreamService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -26,4 +26,7 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:percent:22.2.0'
+    compile 'com.facebook.fresco:fresco:0.5.0+'
+    compile files('libs/universal-image-loader-1.9.4.jar')
+    compile files('libs/picasso-2.5.2.jar')
 }

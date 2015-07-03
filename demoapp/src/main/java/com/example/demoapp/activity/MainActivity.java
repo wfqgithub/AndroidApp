@@ -185,6 +185,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finish();
+    }
+
+    @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mAbToggle.onConfigurationChanged(newConfig);

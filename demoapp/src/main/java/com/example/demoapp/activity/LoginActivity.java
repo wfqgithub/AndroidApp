@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         tvRegist = (TextView) findViewById(R.id.tv_regist);
         tvRegist.setOnClickListener(this);
         mTb  = (Toolbar) findViewById(R.id.toolbar);
-        mTb.setTitle("fuck");
+        mTb.setTitle(getResources().getText(R.string.btn_login));
         mTb.setNavigationIcon(R.mipmap.ic_launcher);
         mTb.setNavigationOnClickListener(this);
     }
