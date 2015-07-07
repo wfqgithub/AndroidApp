@@ -30,7 +30,7 @@ import com.example.demoapp.fragment.ThirdFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener,FirstFragment.OnFragmentInteractionListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener, FirstFragment.OnFragmentInteractionListener {
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
     private ViewPager mViewPager;
 
     private CircleImageView mCivIcon;
-    private String[] tabs ;
+    private String[] tabs;
     private FragmentAdapter fragmentAdapter;
     private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 
@@ -53,10 +53,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
     }
 
 
-    private void initView(){
+    private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
-        mNavigationView = (NavigationView)findViewById(R.id.id_nv_menu);
-        mTb = (Toolbar)findViewById(R.id.toolbar);
+        mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
+        mTb = (Toolbar) findViewById(R.id.toolbar);
         mCivIcon = (CircleImageView) findViewById(R.id.header_userIcon_civ);
         mTb.setTitle("FUCK");
         setSupportActionBar(mTb);
@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mAbToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.drawer_open,R.string.drawer_close);
+        mAbToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
         mAbToggle.syncState();
         mDrawerLayout.setDrawerListener(mAbToggle);
 
@@ -76,14 +76,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
 
     }
 
-    private void initTabs(){
+    private void initTabs() {
         tabs = getResources().getStringArray(R.array.tabName);
     }
 
-    private void initViewPager(){
-        fragments.add(FirstFragment.newInstance("1","2"));
-        fragments.add(SecFragment.newInstance("2","3"));
-        fragments.add(ThirdFragment.newInstance("3","4"));
+    private void initViewPager() {
+        fragments.add(FirstFragment.newInstance("1", "2"));
+        fragments.add(SecFragment.newInstance("2", "3"));
+        fragments.add(ThirdFragment.newInstance("3", "4"));
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
         fragmentAdapter.setData(fragments);
         fragmentAdapter.setTabs(tabs);
@@ -93,12 +93,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
     }
 
 
-    private void addListener(){
+    private void addListener() {
         mCivIcon.setOnClickListener(this);
     }
 
 
-    private void showDialog(){
+    private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Dialog");
         builder.setMessage("少数派客户端");
@@ -108,29 +108,31 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
     }
 
 
-    private void setupDrawerContent(NavigationView navigationView)
-    {
+    private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
 
-                new NavigationView.OnNavigationItemSelectedListener()
-                {
+                new NavigationView.OnNavigationItemSelectedListener() {
 
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem)
-                    {
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
-                        showDialog();
-                        openPercentAct();
+//                        showDialog();
+//                        openPercentAct();
+                        openGifAct();
                         return true;
                     }
                 });
     }
 
 
+    private void openPercentAct() {
+        Intent mIntent = new Intent(this, PercentActivity.class);
+        startActivity(mIntent);
+    }
 
-    private void openPercentAct(){
-       Intent mIntent = new Intent(this,PercentActivity.class);
+    private void openGifAct() {
+        Intent mIntent = new Intent(this, GifActivity.class);
         startActivity(mIntent);
     }
 
@@ -151,7 +153,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }else if(id == android.R.id.home){
+        } else if (id == android.R.id.home) {
             mDrawerLayout.openDrawer(Gravity.LEFT);
         }
 
@@ -163,7 +165,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(hasFocus){
+        if (hasFocus) {
 //            getWindow().getDecorView().setSystemUiVisibility(
 //                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 //                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -176,10 +178,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.header_userIcon_civ:
                 JumpUtils.getInstance().jumpToLoginAct(this);
-            break;
+                break;
 
         }
     }
@@ -187,7 +189,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,F
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         finish();
     }
 

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 
 import com.example.demoapp.R;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -27,10 +28,14 @@ import cn.bmob.v3.Bmob;
  */
 public class BaseApplication extends Application {
 
+    private  Context  mContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        Bmob.initialize(getApplicationContext(),"4337ee3603e21e3bb03da51cb17fe750");
+        mContext = getApplicationContext();
+        Bmob.initialize(mContext,"4337ee3603e21e3bb03da51cb17fe750");
+        Fresco.initialize(mContext);
     }
 
 }

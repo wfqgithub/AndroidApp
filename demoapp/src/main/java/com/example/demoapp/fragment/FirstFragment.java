@@ -18,6 +18,7 @@ import com.example.demoapp.Utils.ToastUtil;
 import com.example.demoapp.adapter.AdVpAdapter;
 import com.example.demoapp.customView.AutoScrollViewPager;
 import com.example.demoapp.model.AdInfo;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.picasso.Picasso;
 
@@ -211,10 +212,11 @@ public class FirstFragment extends Fragment {
 
     private void initViewpager(){
         for(int i = 0 ;i< mAdInfo.size();i++){
-            ImageView mImageView = new ImageView(mContext);
+            SimpleDraweeView mImageView = new SimpleDraweeView(mContext);
 //            ImageLoaderUtils.loadImage(mImageView,mAdInfo.get(i).getPicUrl());
 //            ImageLoader.getInstance().displayImage(mAdInfo.get(i).getPicUrl(),mImageView);
-            Picasso.with(mContext).load(mAdInfo.get(i).getPicUrl()).into(mImageView);
+//            Picasso.with(mContext).load(mAdInfo.get(i).getPicUrl()).into(mImageView);
+            mImageView.setImageURI(Uri.parse(mAdInfo.get(i).getPicUrl()));
             mLists.add(mImageView);
         }
 //        mViewpager.setCycle(true);

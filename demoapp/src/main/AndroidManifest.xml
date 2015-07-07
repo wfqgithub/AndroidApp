@@ -46,6 +46,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".activity.GifActivity"
+            android:label="@string/title_activity_gif" >
+        </activity>
+        <activity
+            android:name=".activity.DetailActivity"
+            android:label="@string/title_activity_detail" >
+        </activity>
     </application>
 
 </manifest>
