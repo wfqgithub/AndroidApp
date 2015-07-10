@@ -2,6 +2,7 @@ package com.example.demoapp.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,8 +19,11 @@ import android.widget.TextView;
 import com.example.demoapp.R;
 import com.example.demoapp.Utils.L;
 import com.example.demoapp.Utils.ToastUtil;
+import com.example.demoapp.activity.DetailActivity;
 import com.example.demoapp.model.Gril;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.apache.http.client.methods.HttpOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,10 +158,7 @@ public class SecFragment extends Fragment implements SwipeRefreshLayout.OnRefres
             public void onSuccess(List<Gril> object) {
                 // TODO Auto-generated method stub
                 ToastUtil.showShort(mContext, "查询成功Gril：共" + object.size() + "条数据。");
-                for (Gril gril : object) {
-                    L.d(TAG, gril.getUrl() + "title = " + gril.getTitle());
-                    mList.add(gril);
-                }
+                mList.addAll(object);
                 L.d(TAG, "mList.size = " + mList.size());
                 setData();
             }
@@ -178,7 +179,7 @@ public class SecFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     }
 
 
-    public  class MyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public class MyRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private List<Gril> mList;
         private Context mContext = null;
@@ -200,7 +201,6 @@ public class SecFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 
             holder.mTitleTv = (TextView) view.findViewById(R.id.title_tv);
             holder.mSimpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.sd_view);
-
             return holder;
         }
 
@@ -222,14 +222,31 @@ public class SecFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public  class ItemViewHolder extends RecyclerView.ViewHolder {
 
         public ItemViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    L.i(TAG, "当前点击的位置："+getPosition());
+                    jumpToDetail(getPosition());
+                }
+            });
         }
 
         private TextView mTitleTv = null;
         private SimpleDraweeView mSimpleDraweeView = null;//图片控件
+
+    }
+
+
+    private void jumpToDetail(int position){
+        Intent intent = new Intent(mContext, DetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Gril",mList.get(position));
+        intent.putExtras(bundle);
+        mContext.startActivity(intent);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -119,7 +119,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         mDrawerLayout.closeDrawers();
 //                        showDialog();
 //                        openPercentAct();
-                        openGifAct();
+//                        openGifAct();
+//                        openDetailAct();
                         return true;
                     }
                 });
@@ -133,6 +134,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     private void openGifAct() {
         Intent mIntent = new Intent(this, GifActivity.class);
+        startActivity(mIntent);
+    }
+
+    private void openDetailAct(){
+        Intent mIntent = new Intent(this, DetailActivity.class);
         startActivity(mIntent);
     }
 

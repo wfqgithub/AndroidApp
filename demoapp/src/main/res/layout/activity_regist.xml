@@ -6,7 +6,6 @@
     tools:context="com.example.demoapp.activity.RegistActivity">
 
 
-
     <RelativeLayout
         android:id="@+id/head_layout"
         android:layout_width="match_parent"
@@ -14,6 +13,7 @@
 
         <include layout="@layout/layout_toolbar"></include>
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/username_layout"
         android:layout_width="match_parent"
@@ -21,15 +21,17 @@
         android:layout_below="@id/head_layout"
         app:layout_marginTopPercent="5%">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/username" />
-
-        <EditText
-            android:id="@+id/regist_username_et"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/regist_username_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入用户名"/>
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -39,15 +41,17 @@
         android:layout_below="@id/username_layout"
         app:layout_marginTopPercent="5%">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pwd" />
-
-        <EditText
-            android:id="@+id/regist_pwd_et"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/regist_pwd_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入密码"/>
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -57,15 +61,17 @@
         android:layout_below="@id/pwd_layout"
         app:layout_marginTopPercent="5%">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/re_pwd" />
-
-        <EditText
-            android:id="@+id/regist_repwd_et"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/regist_repwd_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请再次输入密码"/>
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
     <Button
